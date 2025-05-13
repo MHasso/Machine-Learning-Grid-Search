@@ -40,22 +40,22 @@ def main():
     # create the model pipeline
     mlmodel = MlModel()
     mlmodel.create_pipline(preprocessor)
-    #mlmodel.fit(X_train, y_train)
-    #y_pred = mlmodel.predict(X_test)
-    #mae = mean_absolute_error(y_test, y_pred)
-    #print(mae)
+    mlmodel.fit(X_train, y_train)
+    y_pred = mlmodel.predict(X_test)
+    mae = mean_absolute_error(y_test, y_pred)
+    print(mae)
 
     # create grid search to search for the best parameters for the random forest regressor
     gridsearch = GridSearch()
     gridsearch.define_params([50, 100, 200], [10, 20, 30], [2, 5, 10])
     gridsearch.create_grid_search()
     gridsearch.create_pipeline(preprocessor)
-    #gridsearch.pipeline.fit(X_train, y_train)
+    gridsearch.pipeline.fit(X_train, y_train)
 
     #print the best model and parameters 
-    #print(gridsearch.grid_search.best_estimator_)
-    #print(gridsearch.grid_search.best_score_)
-    #print(gridsearch.grid_search.best_params_)
+    print(gridsearch.grid_search.best_estimator_)
+    print(gridsearch.grid_search.best_score_)
+    print(gridsearch.grid_search.best_params_)
 
     # Fit the best classifier on the training data.
     pipeline_RandomForestRegressor = Pipeline([
